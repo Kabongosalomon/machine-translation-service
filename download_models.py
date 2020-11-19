@@ -14,6 +14,12 @@ parser.add_argument(
 def download_language_model(source, target):
     model = f"opus-mt-{source}-{target}"
     print(">>>Downloading data for %s to %s model..." % (source, target))
+
+    # Check if we have an existing data directory 
+    # if not create one
+    if not os.path.exists('./data'):
+        os.makedirs('./data')
+
     os.makedirs(os.path.join("data", model))
     for f in FILENAMES:
         try:
@@ -31,4 +37,5 @@ def download_language_model(source, target):
 
 if __name__ == "__main__":
     args = parser.parse_args()
+
     download_language_model(args.source, args.target)
